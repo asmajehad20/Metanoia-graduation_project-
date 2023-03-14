@@ -1,108 +1,111 @@
-import {SafeAreaView, View, Text , StyleSheet, ImageBackground, TouchableOpacity, Button} from 'react-native';
+import {ScrollView, SafeAreaView, View, Text , StyleSheet,Image} from 'react-native';
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 
 //moving from page to page
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInPage from './SignInPage';
 import RegisterPage from './RegisterPage';
+import SchedulePage from './SchedulePage';
+import COLORS from '../conts/colors'
+import Button from '../components/Button';
+
 
 const Stack = createNativeStackNavigator();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:false}}>
-        <Stack.Screen name="StartingPage" component={StartingPage} />
-        <Stack.Screen name="Sign In Page" component={SignInPage} />
-        <Stack.Screen name="Register Page" component={RegisterPage} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    return (
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown:false}}>
+          <Stack.Screen name="StartingPage" component={StartingPage} />
+          <Stack.Screen name="Sign In Page" component={SignInPage} />
+          <Stack.Screen name="Register Page" component={RegisterPage} />
+          <Stack.Screen name="Schedule Page" component={SchedulePage} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //quick look on how the first page looks
 //two buttons sign in and register a photo and a logo
-//may add sign in using email later
 const StartingPage = ({ navigation }) => {
+  
+    return (
+      <ScrollView style={styles.container}>
 
-  return (
-    <SafeAreaView>
-    {/* just the status bar */}
-      <View style={styles.status}></View>
-
-      <ImageBackground style={styles.container}>
-        <View style={{alignItems: 'center'}}>
-          {/* sign in button */}
-          <TouchableOpacity 
-          onPress={()=> navigation.navigate('Sign In Page')}
-          style={styles.signinButton}>
-            <Text style={styles.text}> Sign in </Text>
-          </TouchableOpacity>
-
-          {/* register button */}
-          <TouchableOpacity 
-          onPress={()=> navigation.navigate('Register Page')}
-          style={styles.registerButton}>
-            <Text style={styles.text}> Register </Text>
-          </TouchableOpacity>
-        </View>
+      <SafeAreaView style={styles.contentContainer}>
+      {/* just the status bar */}
+        {/* <View style={styles.status}></View> */}
         
-      </ImageBackground>
+        {/* style={{justifyContent: 'center'}} */}
+        <View >
+          <View style={styles.tryto}>
+            <View style={styles.logo}>
+              <Image
+                source={require('../assets/butterfly_104.png')} 
+                style={styles.image}/>
+                
+              <View style={{alignSelf:'center', marginStart:-5}}>
+                <Text style={{fontWeight:'bold', fontSize:40}}>Metanoia</Text> 
+                <Text style={{ fontSize:18, marginTop:-10}}>One day at a time </Text> 
+              </View>
+            </View>
 
-      <StatusBar style="auto" />
-    </SafeAreaView>
-  )
-}
+            <View>
+              <Button 
+                title="Sign in" 
+                onPress={()=> navigation.navigate('Sign In Page')}  /> 
+            </View>
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//styleing 
-const styles = StyleSheet.create({
-    container: {
-      height: "100%",
-      backgroundColor: '#ffe',
-    },
+            <View style={styles.registerButton}>
+              <Button 
+                title="Register" 
+                onPress={()=> navigation.navigate('Register Page')}/>
+            </View>
 
-    status: {
-      backgroundColor: '#aced',
-      height: 40,
-    },
+          </View>
+        </View>
+  
+        {/* <StatusBar style="auto" /> */}
+      </SafeAreaView>
+      </ScrollView>
+    )
+  }
+  
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //styleing 
+  const styles = StyleSheet.create({
+      contentContainer:{
+        paddingTop: 50, 
+        paddingHorizontal: 20,
+      },
 
-    signinButton: {
-      // flex:0.15,
-      backgroundColor: '#fc5c65',
-      height: 70,
-      width: '80%',
-      marginTop:500,
-      // alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 6,
-    },
+      container: {
+        height: "100%",
+        flex: 1,
+        backgroundColor: COLORS.A_white,
+      },
+  
+      registerButton: {
+        marginTop:-30,
+      },
+  
+      image: {
+        width: 110,
+        height: 110,
+        marginStart:10,
+      },
 
-    registerButton: {
-      // flex:0.15,
-      backgroundColor: '#fc5c65',
-      height: 70,
-      width: '80%',
-      marginTop:20,
-      // alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 6,
-    },
+      logo:{
+        flexDirection: 'row',
+      },
 
-    text: {
-      flex:1,//fill the button
-      paddingVertical: 20,//center in the y axis
-      textAlign: 'center',//center in the x axis
-      fontSize: 20,
-      fontWeight: 'bold',
-      borderWidth: 4,
-      borderColor: '#20232a',
-      borderRadius: 6,//make the button less sharp
-    },
-  });
-
-export default App;
+      tryto:{
+        marginTop:"60%"
+      },
+    });
+  
+  export default App;
