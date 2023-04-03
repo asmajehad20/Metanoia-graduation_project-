@@ -1,15 +1,105 @@
-import {ScrollView, SafeAreaView, View, Text , StyleSheet,Image} from 'react-native';
+import {ScrollView, SafeAreaView, View, Text , StyleSheet,Image,TouchableOpacity} from 'react-native';
 import React from 'react';
 // import { StatusBar } from 'expo-status-bar';
 
 //moving from page to page
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+} from '@react-navigation/drawer';
 import SignInPage from './SignInPage';
-import RegisterPage from './RegisterPage';
+import RegistorPage from './RegistorPage';
 import SchedulePage from './SchedulePage';
+import CalendarPage from './CalendarPage';
+import DailyPage from './DailyPage';
 import COLORS from '../conts/colors'
 import Button from '../components/Button';
+
+function Tasks() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Tasks</Text>
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+const CustomDrawer = props => {
+  return (
+    <View style={{ flex: 1 }}>
+      <DrawerContentScrollView {...props}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: 20,
+            backgroundColor: '#f6f6f6',
+            marginBottom: 20,
+          }}
+        >
+          <View>
+            <Text>John Doe</Text>
+            <Text>example@email.com</Text>
+          </View>
+          {/* <Image
+            source={{
+              uri: 'https://images.unsplash.com/photo-1624243225303-261cc3cd2fbc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+            }}
+            style={{ width: 60, height: 60, borderRadius: 30 }}
+          /> */}
+        </View>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+      <TouchableOpacity
+        style={{
+          position: 'absolute',
+          right: 0,
+          left: 0,
+          bottom: 50,
+          backgroundColor: '#f6f6f6',
+          padding: 20,
+        }}
+      >
+        <Text>Log Out</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const DrawerNavigator = () => {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: 'transparent',
+          elevation: 0,
+          shadowOpacity: 0,
+        },
+        headerTitle: '',
+      }}
+      drawerContent={props => <CustomDrawer {...props} />}
+    >
+      <Drawer.Screen component={DailyPage} name='Daily Page' />
+      <Drawer.Screen component={Tasks} name='Tasks' />
+    </Drawer.Navigator>
+  );
+};
+
+function DrawerRouts() {
+  return (
+    <NavigationContainer>
+     
+     <DrawerNavigator />
+     
+    </NavigationContainer>
+  );
+}
 
 
 const Stack = createNativeStackNavigator();
@@ -21,9 +111,11 @@ function App() {
         <Stack.Navigator screenOptions={{headerShown:false}}>
           <Stack.Screen name="StartingPage" component={StartingPage} />
           <Stack.Screen name="Sign In Page" component={SignInPage} />
-          <Stack.Screen name="Register Page" component={RegisterPage} />
+          <Stack.Screen name="Registor Page" component={RegistorPage} />
           <Stack.Screen name="Schedule Page" component={SchedulePage} />
+          <Stack.Screen name="Daily Page" component={DrawerRouts} />
         </Stack.Navigator>
+       
       </NavigationContainer>
     );
   }
@@ -63,7 +155,12 @@ const StartingPage = ({ navigation }) => {
             <View style={styles.registerButton}>
               <Button 
                 title="Register" 
-                onPress={()=> navigation.navigate('Register Page')}/>
+                onPress={()=> navigation.navigate('Registor Page')}/>
+            </View>
+            <View style={styles.calendarButton}>
+              <Button 
+                title="Daily" 
+                onPress={()=> navigation.navigate('Daily Page')}/>
             </View>
 
           </View>
@@ -92,6 +189,10 @@ const StartingPage = ({ navigation }) => {
       registerButton: {
         marginTop:-30,
       },
+      calendarButton:{
+        marginTop:-30,
+
+      },
   
       image: {
         width: 110,
@@ -108,4 +209,4 @@ const StartingPage = ({ navigation }) => {
       },
     });
   
-  export default App;
+  export default App ;
