@@ -6,7 +6,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInPage from './SignInPage';
-import RegisterPage from './RegisterPage';
+import RegisterPage from './RegistorPage';
 import SchedulePage from './SchedulePage';
 import COLORS from '../conts/colors'
 import Button from '../components/Button';
@@ -15,6 +15,12 @@ import Dragtry from './dragtry';
 import SideNavigation from '../Navigation/sideNavigation';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import ProfilePage from './ProfilePage';
+import MessagesPage from './MessagesPage';
+import ChatPage from './ChatPage';
+import CommunityPage from './CommunityPage';
+import CommunityHeader from '../components/CommunityHeader';
+import SearchPage from './SearchPage';
+import SearchComponent from '../components/SearchComponent';
 
 
 
@@ -31,6 +37,12 @@ function App() {
           <Stack.Screen name="Register Page" component={RegisterPage} />
           
           <Stack.Screen name="side Page" component={SideNavigation} />
+          <Stack.Screen name="Messages Page" component={MessagesPage} />
+          <Stack.Screen name="Community Header" component={CommunityHeader} options={{ headerShown: false}} />
+          <Stack.Screen name="Community Page" component={CommunityPage}/>
+          <Stack.Screen name="Chat Page" component={ChatPage} />
+          <Stack.Screen name="Search Page" component={SearchPage} />
+          {/* <Stack.Screen name="Search component" component={SearchComponent} /> */}
 
           {/* <Stack.Screen name="main Page" component={MainNavigation} /> */}
         
@@ -80,6 +92,7 @@ const StartingPage = ({ navigation }) => {
                 title="Register" 
                 onPress={()=> navigation.navigate('Register Page')}/>
             </View>
+
 
           </View>
         </View>
