@@ -21,3 +21,24 @@ It's a smart to-do list that reorders tasks to bring the most important ones to 
 
 ## Community
 <a name="community"></a>
+The Community section comprises four main components:
+
+1. **General Space for Posts:**
+   - A shared space where posts from all users are displayed.
+
+2. **User's Posted Posts:**
+   - Displays posts specifically created by the current user.
+
+3. **Saved Posts:**
+   - A section for saved posts that users find noteworthy or want to revisit.
+
+4. **Project Collaboration Requests:**
+   - A space dedicated to users' requests to collaborate on a project.
+
+Additionally, the Community section features:
+
+- **Search Functionality:**
+  - Enables users to search through the community's content efficiently.
+
+- **Chat Feature:**
+  - Provides users with a chat functionality to communicate with each other.
